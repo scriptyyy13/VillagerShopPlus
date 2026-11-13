@@ -1,0 +1,129 @@
+messages:
+  no-permission: "<red>You don't have permission for this!</red>"
+  only-players: "<red>This command is for players only.</red>"
+  config-reloaded: "<green>Configuration and language files reloaded!</green>"
+  shop-created: "<green>Shopkeeper created! (Type: <yellow>{type}</yellow>, Profession: <yellow>{prof}</yellow>)</green>"
+  shop-deleted: "<red>Shopkeeper removed.</red>"
+  shop-moved: "<green>Shopkeeper moved to your position!</green>"
+  trade-added: "<green>Trade saved and added to shopkeeper!</green>"
+  trade-edited: "<green>Trade successfully updated!</green>"
+  trade-deleted: "<yellow>Trade deleted.</yellow>"
+  no-nearby-shop: "<red>No shopkeeper nearby (within 5 blocks)!</red>"
+  invalid-type: "<red>Invalid type! Available: <yellow>{types}</yellow></red>"
+  invalid-prof: "<red>Invalid profession! Available: <yellow>{profs}</yellow></red>"
+  creator-need-items: "<red>You must place at least [Price 1] and [Item]!</red>"
+  type-changed: "<green>Type changed to: <yellow>{type}</yellow></green>"
+  prof-changed: "<green>Profession changed to: <yellow>{prof}</yellow></green>"
+
+  name-prompt:
+    - "<gold>Type the new name in chat (colors supported):</gold>"
+    - "<gray>Type <red>cancel</red> to abort or <yellow>reset</yellow> to clear.</gray>"
+  name-set: "<green>Name updated!</green>"
+  name-reset: "<yellow>Name cleared.</yellow>"
+  name-shown: "<green>Name is now visible above head.</green>"
+  name-hidden: "<yellow>Name is now hidden.</yellow>"
+  name-cancelled: "<gray>Name change cancelled.</gray>"
+
+  help:
+    - ""
+    - " <gold><bold>VillagerShop<yellow>+</yellow></bold></gold> <dark_gray>•</dark_gray> <gray>Command List</gray>"
+    - ""
+    - " <yellow>/vshop spawn <gray>[type] [prof]</gray></yellow> <dark_gray>-</dark_gray> <gray>spawn a shopkeeper</gray>"
+    - " <yellow>/vshop move</yellow> <dark_gray>-</dark_gray> <gray>move nearest shopkeeper to you</gray>"
+    - " <yellow>/vshop edit</yellow> <dark_gray>-</dark_gray> <gray>open nearest shopkeeper menu</gray>"
+    - " <yellow>/vshop reload</yellow> <dark_gray>-</dark_gray> <gray>reload config and language</gray>"
+    - " <yellow>/vshop help</yellow> <dark_gray>-</dark_gray> <gray>show this list</gray>"
+    - ""
+    - " <dark_gray>» <gray>Settings: <green>Crouch + Right Click</green> the villager</dark_gray>"
+    - " <gold>Created by</gold> <blue>Scriptyyy</blue>"
+    - ""
+
+gui:
+  hub-title: "<dark_gray>Shop Settings</dark_gray>"
+  main-title: "<dark_gray>Shop Trades</dark_gray>"
+  creator-title: "<dark_gray>Create Trade</dark_gray>"
+  editor-title: "<dark_gray>Edit Trade</dark_gray>"
+  types-title: "<dark_gray>Select Biome Type</dark_gray>"
+  profs-title: "<dark_gray>Select Profession</dark_gray>"
+
+  hub:
+    trades:
+      name: "<green>Manage Trades</green>"
+      lore:
+        - "<gray>View, add, edit</gray>"
+        - "<gray>and reorder trades.</gray>"
+    type:
+      name: "<yellow>Appearance (Biome)</yellow>"
+      lore:
+        - "<gray>Current: <white>{type}</white></gray>"
+        - ""
+        - "<yellow>Click</yellow> <dark_gray>-</dark_gray> <gray>change appearance</gray>"
+    profession:
+      name: "<gold>Profession</gold>"
+      lore:
+        - "<gray>Current: <white>{prof}</white></gray>"
+        - ""
+        - "<yellow>Click</yellow> <dark_gray>-</dark_gray> <gray>change profession</gray>"
+    move:
+      name: "<aqua>Move Shopkeeper Here</aqua>"
+      lore:
+        - "<gray>Teleports this shopkeeper</gray>"
+        - "<gray>to your current position.</gray>"
+    name:
+      name: "<light_purple>Shopkeeper Name</light_purple>"
+      lore:
+        - "<gray>Current: {name}</gray>"
+        - "<gray>Nametag: {visible}</gray>"
+        - ""
+        - "<yellow>LMB</yellow> <dark_gray>-</dark_gray> <gray>type name in chat</gray>"
+        - "<yellow>RMB</yellow> <dark_gray>-</dark_gray> <gray>toggle visibility</gray>"
+        - "<yellow>Shift+RMB</yellow> <dark_gray>-</dark_gray> <gray>reset name</gray>"
+    delete:
+      name: "<red>Delete Shopkeeper</red>"
+      lore:
+        - "<gray>Remove this mob permanently.</gray>"
+
+  name-status:
+    visible: "<green>On</green>"
+    hidden: "<red>Off</red>"
+    none: "<dark_gray>None</dark_gray>"
+
+  add-button:
+    name: "<green>+ New Trade</green>"
+    lore:
+      - "<gray>Open trade builder</gray>"
+
+  delete-button:
+    name: "<red>« Back to Settings</red>"
+    lore:
+      - "<gray>Return to hub menu</gray>"
+
+  trade-item:
+    price1: "<gray>Price 1: <yellow>{type} x{amount}</yellow></gray>"
+    price2: "<gray>Price 2: <yellow>{type} x{amount}</yellow></gray>"
+    lore:
+      - ""
+      - "<yellow>LMB</yellow> <dark_gray>-</dark_gray> <gray>edit trade</gray>"
+      - "<yellow>RMB</yellow> <dark_gray>-</dark_gray> <red>delete trade</red>"
+      - "<yellow>Shift+LMB</yellow> <dark_gray>-</dark_gray> <aqua>move left ◄</aqua>"
+      - "<yellow>Shift+RMB</yellow> <dark_gray>-</dark_gray> <aqua>move right ►</aqua>"
+
+  creator:
+    plus-sign: "<gold>+</gold>"
+    result-sign: "<yellow>➜ Result</yellow>"
+    back-button:
+      name: "<red>« Back to trades</red>"
+    confirm-button:
+      name: "<green><bold>✔ Save Trade</bold></green>"
+      lore:
+        - "<gray>Click with item to set template.</gray>"
+        - "<gray>Click with empty hand to clear slot.</gray>"
+        - "<gray>Items from inventory are not consumed!</gray>"
+
+  editor:
+    confirm-button:
+      name: "<green><bold>✔ Apply Changes</bold></green>"
+      lore:
+        - "<gray>Click with item to set template.</gray>"
+        - "<gray>Click with empty hand to clear slot.</gray>"
+        - "<gray>Items from inventory are not consumed!</gray>"

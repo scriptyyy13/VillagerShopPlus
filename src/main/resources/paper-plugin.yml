@@ -1,0 +1,27 @@
+name: VillagerShopPlus
+version: '${version}'
+main: scriptyyy.villagerShopPlus.VillagerShopPlus
+api-version: '26.1'
+author: Scriptyyy
+description: Advanced plugin for the shop
+
+permissions:
+  villagershop.admin:
+    description: Full access to all functions
+    default: op
+    children:
+      villagershop.spawn: true
+      villagershop.edit: true
+      villagershop.reload: true
+
+  villagershop.spawn:
+    description: Can spawn villager
+    default: op
+
+  villagershop.edit:
+    description: The permission to open the menu and add deals
+    default: op
+
+  villagershop.reload:
+    description: Permission to reload the plugin configuration
+    default: op

@@ -1,0 +1,129 @@
+messages:
+  no-permission: "<red>У вас нет прав на это действие!</red>"
+  only-players: "<red>Эта команда доступна только игрокам.</red>"
+  config-reloaded: "<green>Конфигурация и языковой файл успешно перезагружены!</green>"
+  shop-created: "<green>Житель создан! (Тип: <yellow>{type}</yellow>, Профессия: <yellow>{prof}</yellow>)</green>"
+  shop-deleted: "<red>Житель-магазин удален.</red>"
+  shop-moved: "<green>Торговец успешно перемещен на вашу позицию!</green>"
+  trade-added: "<green>Сделка сохранена и добавлена жителю!</green>"
+  trade-edited: "<green>Сделка успешно обновлена!</green>"
+  trade-deleted: "<yellow>Сделка удалена.</yellow>"
+  no-nearby-shop: "<red>Рядом нет жителя-магазина (в радиусе 5 блоков)!</red>"
+  invalid-type: "<red>Неверный тип! Доступные: <yellow>{types}</yellow></red>"
+  invalid-prof: "<red>Неверная профессия! Доступные: <yellow>{profs}</yellow></red>"
+  creator-need-items: "<red>Нужно положить минимум [Цену 1] и [Товар]!</red>"
+  type-changed: "<green>Тип жителя изменен на: <yellow>{type}</yellow></green>"
+  prof-changed: "<green>Профессия жителя изменена на: <yellow>{prof}</yellow></green>"
+
+  name-prompt:
+    - "<gold>Напишите ник для жителя в чат (поддерживает цвета):</gold>"
+    - "<gray>Напишите <red>cancel</red> для отмены или <yellow>reset</yellow> для сброса.</gray>"
+  name-set: "<green>Ник жителя обновлен!</green>"
+  name-reset: "<yellow>Ник жителя сброшен.</yellow>"
+  name-shown: "<green>Ник теперь отображается над головой.</green>"
+  name-hidden: "<yellow>Ник скрыт над головой.</yellow>"
+  name-cancelled: "<gray>Смена ника отменена.</gray>"
+
+  help:
+    - ""
+    - " <gold><bold>VillagerShop<yellow>+</yellow></bold></gold> <dark_gray>•</dark_gray> <gray>Команды плагина</gray>"
+    - ""
+    - " <yellow>/vshop spawn <gray>[тип] [профа]</gray></yellow> <dark_gray>-</dark_gray> <gray>создать жителя</gray>"
+    - " <yellow>/vshop move</yellow> <dark_gray>-</dark_gray> <gray>переместить ближайшего жителя к себе</gray>"
+    - " <yellow>/vshop edit</yellow> <dark_gray>-</dark_gray> <gray>открыть меню ближайшего жителя</gray>"
+    - " <yellow>/vshop reload</yellow> <dark_gray>-</dark_gray> <gray>перезагрузить конфиг и локализацию</gray>"
+    - " <yellow>/vshop help</yellow> <dark_gray>-</dark_gray> <gray>показать этот список</gray>"
+    - ""
+    - " <dark_gray>» <gray>Настройка: <green>ПКМ в присяде</green> по жителю</dark_gray>"
+    - " <gold>Создано</gold> <blue>Scriptyyy</blue>"
+    - ""
+
+gui:
+  hub-title: "<dark_gray>Управление магазином</dark_gray>"
+  main-title: "<dark_gray>Сделки жителя</dark_gray>"
+  creator-title: "<dark_gray>Создание сделки</dark_gray>"
+  editor-title: "<dark_gray>Редактирование сделки</dark_gray>"
+  types-title: "<dark_gray>Выбор биома жителя</dark_gray>"
+  profs-title: "<dark_gray>Выбор профессии</dark_gray>"
+
+  hub:
+    trades:
+      name: "<green>Управление сделками</green>"
+      lore:
+        - "<gray>Просмотр, добавление,</gray>"
+        - "<gray>редактирование и порядок товаров.</gray>"
+    type:
+      name: "<yellow>Внешний вид (Биом)</yellow>"
+      lore:
+        - "<gray>Текущий: <white>{type}</white></gray>"
+        - ""
+        - "<yellow>Клик</yellow> <dark_gray>-</dark_gray> <gray>выбрать другой вид</gray>"
+    profession:
+      name: "<gold>Профессия жителя</gold>"
+      lore:
+        - "<gray>Текущая: <white>{prof}</white></gray>"
+        - ""
+        - "<yellow>Клик</yellow> <dark_gray>-</dark_gray> <gray>выбрать профессию</gray>"
+    move:
+      name: "<aqua>Переместить жителя сюда</aqua>"
+      lore:
+        - "<gray>Телепортирует этого торговца</gray>"
+        - "<gray>ровно на вашу текущую позицию.</gray>"
+    name:
+      name: "<light_purple>Ник жителя</light_purple>"
+      lore:
+        - "<gray>Текущий: {name}</gray>"
+        - "<gray>Над головой: {visible}</gray>"
+        - ""
+        - "<yellow>ЛКМ</yellow> <dark_gray>-</dark_gray> <gray>ввести новый в чат</gray>"
+        - "<yellow>ПКМ</yellow> <dark_gray>-</dark_gray> <gray>скрыть / показать</gray>"
+        - "<yellow>Shift+ПКМ</yellow> <dark_gray>-</dark_gray> <gray>сбросить</gray>"
+    delete:
+      name: "<red>Удалить жителя</red>"
+      lore:
+        - "<gray>Безвозвратно убирает моба.</gray>"
+
+  name-status:
+    visible: "<green>Вкл</green>"
+    hidden: "<red>Выкл</red>"
+    none: "<dark_gray>Не задан</dark_gray>"
+
+  add-button:
+    name: "<green>+ Создать сделку</green>"
+    lore:
+      - "<gray>Открыть конструктор сделки</gray>"
+
+  delete-button:
+    name: "<red>« В меню управления</red>"
+    lore:
+      - "<gray>Вернуться назад</gray>"
+
+  trade-item:
+    price1: "<gray>Цена 1: <yellow>{type} x{amount}</yellow></gray>"
+    price2: "<gray>Цена 2: <yellow>{type} x{amount}</yellow></gray>"
+    lore:
+      - ""
+      - "<yellow>ЛКМ</yellow> <dark_gray>-</dark_gray> <gray>редактировать</gray>"
+      - "<yellow>ПКМ</yellow> <dark_gray>-</dark_gray> <red>удалить</red>"
+      - "<yellow>Shift+ЛКМ</yellow> <dark_gray>-</dark_gray> <aqua>переместить влево ◄</aqua>"
+      - "<yellow>Shift+ПКМ</yellow> <dark_gray>-</dark_gray> <aqua>переместить вправо ►</aqua>"
+
+  creator:
+    plus-sign: "<gold>+</gold>"
+    result-sign: "<yellow>➜ Результат</yellow>"
+    back-button:
+      name: "<red>« Назад к сделкам</red>"
+    confirm-button:
+      name: "<green><bold>✔ Сохранить сделку</bold></green>"
+      lore:
+        - "<gray>Клик предметом — задать образец.</gray>"
+        - "<gray>Клик пустой рукой — очистить слот.</gray>"
+        - "<gray>Предметы из инвентаря не тратятся!</gray>"
+
+  editor:
+    confirm-button:
+      name: "<green><bold>✔ Применить изменения</bold></green>"
+      lore:
+        - "<gray>Клик предметом — изменить образец.</gray>"
+        - "<gray>Клик пустой рукой — очистить слот.</gray>"
+        - "<gray>Предметы из инвентаря не тратятся!</gray>"

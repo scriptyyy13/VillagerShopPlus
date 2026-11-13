@@ -1,0 +1,3 @@
+# язык плагина (соответствует файлу в папке lang, например: ru_ru или en_us)
+# plugin language (corresponds to the file in the lang folder, for example: ru_ru or en_us)
+language: "en_us"
