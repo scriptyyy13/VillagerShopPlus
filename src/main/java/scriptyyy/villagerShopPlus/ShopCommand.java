@@ -64,7 +64,6 @@ public class ShopCommand implements BasicCommand {
             return;
         }
 
-        // спавн жителя
         if (args[0].equalsIgnoreCase("spawn")) {
             if (!player.hasPermission("villagershop.spawn")) {
                 player.sendMessage(plugin.getMsg("no-permission"));
@@ -105,8 +104,8 @@ public class ShopCommand implements BasicCommand {
             v.setProfession(prof);
             v.setVillagerLevel(5);
 
-            // центрируем и сохраняем координаты
             plugin.setShopLocation(v, loc);
+            plugin.registerShop(v);
 
             String msg = plugin.getRaw("messages.shop-created")
                     .replace("{type}", type.key().value())
@@ -115,7 +114,6 @@ public class ShopCommand implements BasicCommand {
             return;
         }
 
-        // команда перемещения ближайшего жителя к игроку
         if (args[0].equalsIgnoreCase("move")) {
             if (!player.hasPermission("villagershop.edit")) {
                 player.sendMessage(plugin.getMsg("no-permission"));
@@ -133,7 +131,6 @@ public class ShopCommand implements BasicCommand {
             return;
         }
 
-        // открыть меню ближайшего жителя
         if (args[0].equalsIgnoreCase("edit")) {
             if (!player.hasPermission("villagershop.edit")) {
                 player.sendMessage(plugin.getMsg("no-permission"));

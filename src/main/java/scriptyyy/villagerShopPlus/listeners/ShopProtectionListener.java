@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.world.EntitiesLoadEvent;
+import org.bukkit.event.world.EntitiesUnloadEvent;
 import scriptyyy.villagerShopPlus.VillagerShopPlus;
 
 public class ShopProtectionListener implements Listener {
@@ -26,16 +27,25 @@ public class ShopProtectionListener implements Listener {
         return plugin.isShop(villager);
     }
 
-    // откладываем починку на 1 тик чтобы чанк успел зарегистрировать моба
     @EventHandler
     public void onEntitiesLoad(EntitiesLoadEvent event) {
         Bukkit.getScheduler().runTask(plugin, () -> {
             for (Entity e : event.getEntities()) {
                 if (e.isValid() && e instanceof Villager v && plugin.isShop(v)) {
+                    plugin.registerShop(v);
                     plugin.fixShop(v);
                 }
             }
         });
+    }
+
+    @EventHandler
+    public void onEntitiesUnload(EntitiesUnloadEvent event) {
+        for (Entity e : event.getEntities()) {
+            if (e instanceof Villager v && plugin.isShop(v)) {
+                plugin.unregisterShop(v.getUniqueId());
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

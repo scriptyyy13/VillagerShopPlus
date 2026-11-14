@@ -13,6 +13,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Villager;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -23,7 +24,7 @@ import scriptyyy.villagerShopPlus.listeners.ShopInteractListener;
 import scriptyyy.villagerShopPlus.listeners.ShopProtectionListener;
 
 import java.io.File;
-import java.util.List;
+import java.util.*;
 
 public final class VillagerShopPlus extends JavaPlugin {
 
@@ -35,6 +36,8 @@ public final class VillagerShopPlus extends JavaPlugin {
     private NamespacedKey locYawKey;
     private NamespacedKey locPitchKey;
     private Team shopTeam;
+
+    private final Set<UUID> activeShops = new HashSet<>();
 
     private FileConfiguration langConfig;
     private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
@@ -68,21 +71,41 @@ public final class VillagerShopPlus extends JavaPlugin {
             );
         });
 
-        // таймер проверки и возврата жителей на точку (каждые 4 секунды)
-        Bukkit.getScheduler().runTaskTimer(this, () -> {
-            for (World world : Bukkit.getWorlds()) {
-                for (Villager v : world.getEntitiesByClass(Villager.class)) {
-                    if (isShop(v)) {
-                        fixShop(v);
-                    }
+        // единоразово при старте наполняем кэш только стоящими жителями
+        for (World world : Bukkit.getWorlds()) {
+            for (Villager v : world.getEntitiesByClass(Villager.class)) {
+                if (isShop(v)) {
+                    registerShop(v);
+                    fixShop(v);
                 }
             }
-        }, 80L, 80L);
+        }
+
+        // оптимизированный таймер проверяет только наш кэш магазинов без поиска по миру
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
+            Iterator<UUID> it = activeShops.iterator();
+            while (it.hasNext()) {
+                UUID id = it.next();
+                Entity entity = Bukkit.getEntity(id);
+                if (entity instanceof Villager v && v.isValid() && isShop(v)) {
+                    fixShop(v);
+                } else if (entity == null || !entity.isValid()) {
+                    it.remove();
+                }
+            }
+        }, 100L, 100L);
 
         getComponentLogger().info(parse("<green>VillagerShopPlus запущен!</green>"));
     }
 
-    // загрузка языкового файла из папки lang
+    public void registerShop(Villager v) {
+        activeShops.add(v.getUniqueId());
+    }
+
+    public void unregisterShop(UUID uuid) {
+        activeShops.remove(uuid);
+    }
+
     public void loadLanguage() {
         saveResource("lang/ru_ru.yml", false);
         saveResource("lang/en_us.yml", false);
@@ -105,7 +128,6 @@ public final class VillagerShopPlus extends JavaPlugin {
         this.shopTeam = team;
     }
 
-    // фиксирует моба на точке и не дает провалиться под блок
     public void fixShop(Villager v) {
         v.setCollidable(false);
         v.setInvulnerable(true);
@@ -131,14 +153,12 @@ public final class VillagerShopPlus extends JavaPlugin {
             float pitch = pdc.getOrDefault(locPitchKey, PersistentDataType.FLOAT, v.getPitch());
 
             Location target = new Location(v.getWorld(), x, y, z, yaw, pitch);
-            // возвращаем если сместился
             if (v.getLocation().distanceSquared(target) > 0.001) {
                 v.teleport(target);
             }
         }
     }
 
-    // запись точной отцентрированной локации в память жителя
     public void setShopLocation(Villager v, Location loc) {
         double x = loc.getBlockX() + 0.5;
         double z = loc.getBlockZ() + 0.5;
