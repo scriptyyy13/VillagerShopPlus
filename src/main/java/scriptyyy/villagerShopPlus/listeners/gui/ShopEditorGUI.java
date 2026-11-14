@@ -123,6 +123,7 @@ public class ShopEditorGUI {
         }
 
         if (slot == 23) {
+            pl.unregisterShop(villager.getUniqueId());
             villager.remove();
             player.closeInventory();
             player.sendMessage(pl.getMsg("shop-deleted"));
@@ -146,7 +147,7 @@ public class ShopEditorGUI {
             inv.setItem(slot++, item);
         }
 
-        ItemStack back = createBtn(Material.RED_CONCRETE, "<red>« Назад</red>", List.of());
+        ItemStack back = createBtn(Material.RED_CONCRETE, pl.getRaw("gui.back-button"), List.of());
         inv.setItem(22, back);
         player.openInventory(inv);
     }
@@ -198,7 +199,7 @@ public class ShopEditorGUI {
             inv.setItem(slot++, item);
         }
 
-        ItemStack back = createBtn(Material.RED_CONCRETE, "<red>« Назад</red>", List.of());
+        ItemStack back = createBtn(Material.RED_CONCRETE, pl.getRaw("gui.back-button"), List.of());
         inv.setItem(22, back);
         player.openInventory(inv);
     }
@@ -304,7 +305,6 @@ public class ShopEditorGUI {
             List<MerchantRecipe> list = new ArrayList<>(villager.getRecipes());
             if (slot >= list.size()) return;
 
-            // сдвиг влево
             if (event.isShiftClick() && event.isLeftClick()) {
                 if (slot > 0) {
                     Collections.swap(list, slot, slot - 1);
@@ -314,7 +314,6 @@ public class ShopEditorGUI {
                 return;
             }
 
-            // сдвиг вправо
             if (event.isShiftClick() && event.isRightClick()) {
                 if (slot < list.size() - 1) {
                     Collections.swap(list, slot, slot + 1);
@@ -324,7 +323,6 @@ public class ShopEditorGUI {
                 return;
             }
 
-            // пкм: удалить
             if (event.isRightClick()) {
                 list.remove(slot);
                 villager.setRecipes(list);
@@ -333,7 +331,6 @@ public class ShopEditorGUI {
                 return;
             }
 
-            // лкм: редактировать
             if (event.isLeftClick()) {
                 openTradeBuilderGUI(player, villager, slot);
             }
@@ -378,11 +375,9 @@ public class ShopEditorGUI {
         player.openInventory(inv);
     }
 
-    // логика кликов без физического перемещения предметов (полный антидюп)
     public static void handleCreatorClick(InventoryClickEvent event, VillagerShopPlus pl) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
 
-        // запрещаем читерские перемещения
         if (event.getClick().isKeyboardClick() || event.isShiftClick()) {
             event.setCancelled(true);
             return;
@@ -390,7 +385,6 @@ public class ShopEditorGUI {
 
         int rawSlot = event.getRawSlot();
 
-        // клики в нижнем инвентаре игрока не отменяем чтобы брать вещи в руку
         if (rawSlot >= 27) {
             return;
         }
@@ -402,14 +396,11 @@ public class ShopEditorGUI {
 
         Inventory top = event.getView().getTopInventory();
 
-        // клики по слотам цены и товара
         if (rawSlot == 11 || rawSlot == 13 || rawSlot == 15) {
             ItemStack cursor = event.getCursor();
             if (!cursor.getType().isAir()) {
-                // копируем как виртуальный образец (предмет остается у игрока на курсоре)
                 top.setItem(rawSlot, cursor.clone());
             } else {
-                // пустой курсор очищает слот образца
                 top.setItem(rawSlot, null);
             }
             return;

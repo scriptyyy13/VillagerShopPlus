@@ -45,6 +45,7 @@ gui:
   editor-title: "<dark_gray>Edit Trade</dark_gray>"
   types-title: "<dark_gray>Select Biome Type</dark_gray>"
   profs-title: "<dark_gray>Select Profession</dark_gray>"
+  back-button: "<red>« Back</red>"
 
   hub:
     trades:

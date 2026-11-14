@@ -45,6 +45,7 @@ gui:
   editor-title: "<dark_gray>Редактирование сделки</dark_gray>"
   types-title: "<dark_gray>Выбор биома жителя</dark_gray>"
   profs-title: "<dark_gray>Выбор профессии</dark_gray>"
+  back-button: "<red>« Назад</red>"
 
   hub:
     trades:
